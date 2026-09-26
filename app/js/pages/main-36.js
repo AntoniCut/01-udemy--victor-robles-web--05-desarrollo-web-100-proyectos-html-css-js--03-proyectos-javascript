@@ -4,11 +4,6 @@
     *  -----------------------------------------------------------  *
 */
 
-/**
- * @typedef {Object} Nota
- * @property {string} title - Título de la nota.
- * @property {string} body - Cuerpo de la nota.
- */
 
 
 (() => {
@@ -18,6 +13,15 @@
     console.warn("-----  Proyecto 36 JS  -----");
     console.log("\n");
 
+
+    /**
+     * -----------------------
+     * -----  `Nota {}`  -----
+     * -----------------------
+     * @typedef {Object} Nota
+     * @property {string} title - Título de la nota.
+     * @property {string} body - Cuerpo de la nota.
+     */
 
     /*
         *  ---------------------------------  *
@@ -29,7 +33,7 @@
     const $notesDemo = document.querySelector(".demo__notes");
 
     /** @type {HTMLButtonElement | null} - `Botón para añadir una nota` */
-    const $btn = $notesDemo ? $notesDemo.querySelector(".notes__btn") : null;
+    const $btn = $notesDemo ? $notesDemo.querySelector(".actions__btn") : null;
 
     /** @type {HTMLSectionElement | null} - `Listado de notas` */
     const $notes = $notesDemo ? $notesDemo.querySelector(".notes__list") : null;
@@ -60,15 +64,15 @@
         /** @type {HTMLArticleElement} - `artículo de la nota` */
         const $note = document.createElement("article");
         
-        $note.classList.add("notes__note");
+        $note.classList.add("list__note");
 
 
         //  -----  animaciones de aparición de las notas  -----
         if (transition) {
-            setTimeout(() => $note.classList.add("note--visible"), 10);
+            setTimeout(() => $note.classList.add("list__note--visible"), 10);
         }
         else {
-            $note.classList.add("note--visible-no-transition");
+            $note.classList.add("list__note--visible-no-transition");
         }
 
 
@@ -95,13 +99,13 @@
         const $deleteBtn = document.createElement("button");
         
         $deleteBtn.type = "button";
-        $deleteBtn.classList.add("note__delete");
+        $deleteBtn.classList.add("header__delete");
         $deleteBtn.setAttribute("aria-label", "Eliminar nota");
 
         /** @type {HTMLElement} - `icono de la papelera` */
         const $icon = document.createElement("i");
         
-        $icon.classList.add("note__icon", "fa-solid", "fa-trash");
+        $icon.classList.add("delete__icon", "fa-solid", "fa-trash");
         $icon.setAttribute("aria-hidden", "true");
 
         //  -----  añadir icono a la papelera  -----
@@ -139,10 +143,10 @@
             event.preventDefault();
 
             //  -----  animaciones de desaparición de la nota  -----
-            $note.classList.remove("note--visible-no-transition");
+            $note.classList.remove("list__note--visible-no-transition");
             
             //  -----  eliminar la animación de aparición de la nota  -----
-            $note.classList.remove("note--visible");
+            $note.classList.remove("list__note--visible");
 
             //  -----  eliminar la nota del DOM  -----
             setTimeout(() => {
@@ -167,7 +171,7 @@
         const arrNotes = [];
 
         /** @type {NodeListOf<HTMLArticleElement>} - `notas renderizadas` */
-        const $notesDom = $notes.querySelectorAll(".notes__note");
+        const $notesDom = $notes.querySelectorAll(".list__note");
 
 
         //  -----  recorrer las notas renderizadas  -----

@@ -22,7 +22,7 @@
     margin-bottom: 2rem;
 }
 
-.notes__btn {
+.actions__btn {
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -75,7 +75,7 @@
 
 //  -----  nota  -----
 
-.notes__note {
+.list__note {
     width: 100%;
     max-width: 30rem;
     opacity: 0;
@@ -86,17 +86,17 @@
 
 @media (min-width: 481px) {
 
-    .notes__note {
+    .list__note {
         width: 30rem;
     }
 }
 
-.note--visible {
+.list__note--visible {
     opacity: 1;
     transform: scale(1);
 }
 
-.note--visible-no-transition {
+.list__note--visible-no-transition {
     opacity: 1;
     transform: scale(1);
     transition: none;
@@ -131,7 +131,7 @@
     color: white;
 }
 
-.note__delete {
+.header__delete {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -142,7 +142,7 @@
     cursor: pointer;
 }
 
-.note__icon {
+.delete__icon {
     pointer-events: none;
 }
 
