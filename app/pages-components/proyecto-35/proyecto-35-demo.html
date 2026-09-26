@@ -8,19 +8,33 @@
 
     <article class="course__card">
 
-        <h2 class="course__title" aria-live="polite" aria-label="¡Bienvenido al Curso!"></h2>
+        <h2
+            class="card__title"
+            data-texto="¡Bienvenido al Curso!"
+            aria-label="¡Bienvenido al Curso!"
+        >
+            <span class="title__typed" aria-hidden="true"></span>
+        </h2>
 
-        <div class="course__image">
+        <figure class="card__image">
             <img
-                class="course__img"
+                class="image__img"
                 src="/assets/img/proyecto-35/course-1.png"
                 alt="Imagen del curso"
             >
-        </div>
+        </figure>
 
-        <p class="course__price">9.99€</p>
+        <p class="card__price">9.99€</p>
 
-        <a href="https://victorroblesweb.es/master-react" class="course__btn">Comprar</a>
+        <a 
+            href="https://victorroblesweb.es/master-react" 
+            class="card__btn"
+            aria-label="Comprar el curso"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            Comprar
+        </a>
 
     </article>
 

@@ -33,12 +33,17 @@
 
     /** @type {HTMLHeadingElement | null} - `título con efecto de escritura` */
     const $title = /** @type {HTMLHeadingElement | null} */ (
-        $demo.querySelector(".course__title")
+        $demo.querySelector(".card__title")
+    );
+
+    /** @type {HTMLSpanElement | null} - `texto visible del título` */
+    const $typed = /** @type {HTMLSpanElement | null} */ (
+        $demo.querySelector(".title__typed")
     );
 
 
-    //  -----  validamos que exista el título  -----
-    if (!$title) {
+    //  -----  validamos que existan el título y el texto visible  -----
+    if (!$title || !$typed) {
         throw new Error("No se ha encontrado el título del curso.");
     }
 
@@ -50,7 +55,7 @@
     */
 
     /** - `texto completo del título` */
-    const texto = "¡Bienvenido al Curso!";
+    const texto = $title.dataset.texto ?? "";
 
     /** - `final del recorte del texto` */
     let letraFin = 1;
@@ -58,8 +63,20 @@
     /** - `intervalo entre cada letra en milisegundos` */
     const velocidad = 150;
 
+    /** - `pausa al completar el título, en milisegundos` */
+    const pausa = 900;
+
     /** @type {number | null} - `identificador del intervalo de escritura` */
     let intervalId = null;
+
+    /** @type {number | null} - `identificador de la pausa antes de reiniciar` */
+    let timeoutId = null;
+
+
+    //  -----  validamos que el título tenga texto  -----
+    if (!texto) {
+        throw new Error("No se ha encontrado el texto del título.");
+    }
 
 
     /*
@@ -77,19 +94,32 @@
      */
     const escribirTitulo = () => {
 
+        //  -----  evitar intervalos duplicados  -----
         if (intervalId !== null) {
             window.clearInterval(intervalId);
+            intervalId = null;
         }
 
         intervalId = window.setInterval(() => {
 
-            $title.textContent = texto.slice(0, letraFin);
-            letraFin++;
+            $typed.textContent = texto.slice(0, letraFin);
 
-            //  -----  si se completó el texto, volver a empezar  -----
-            if (letraFin > texto.length) {
-                letraFin = 1;
+            //  -----  si aún faltan letras, avanzar  -----
+            if (letraFin < texto.length) {
+                letraFin++;
+                return;
             }
+
+            //  -----  al completar, pausar y volver a empezar  -----
+            if (intervalId !== null) {
+                window.clearInterval(intervalId);
+                intervalId = null;
+            }
+
+            timeoutId = window.setTimeout(() => {
+                letraFin = 1;
+                escribirTitulo();
+            }, pausa);
 
         }, velocidad);
     };
